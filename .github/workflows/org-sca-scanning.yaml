@@ -1,5 +1,6 @@
 name: Organization Security Code Scanning
 on:
+  workflow_call:
   pull_request:
     branches: [ main ]
 
@@ -14,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Run Betterleaks
-        uses: ./.github/security/sca/betterleaks
+        uses: un-fao/fao-github-security-workflows/.github/security/sca/betterleaks@main
         with:
           pr_id: ${{ github.event.pull_request.number }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -25,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Run Semgrep
-        uses: ./.github/security/sca/semgrep
+        uses: un-fao/fao-github-security-workflows/.github/security/sca/semgrep@main
         with:
           pr_id: ${{ github.event.pull_request.number }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
